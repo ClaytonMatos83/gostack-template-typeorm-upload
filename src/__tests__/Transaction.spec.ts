@@ -10,14 +10,14 @@ import app from '../app';
 
 let connection: Connection;
 
-describe('Transaction', () => {
-  beforeAll(async () => {
+   describe('Transaction', () => {
+   beforeAll(async () => {
     connection = await createConnection('test-connection');
-    
+
     await connection.query('DROP TABLE IF EXISTS transactions');
     await connection.query('DROP TABLE IF EXISTS categories');
     await connection.query('DROP TABLE IF EXISTS migrations');
-    
+
     await connection.runMigrations();
   });
 
@@ -129,7 +129,7 @@ describe('Transaction', () => {
     const transactionsRepository = getRepository(Transaction);
     const categoriesRepository = getRepository(Category);
 
-    const { identifiers } = await categoriesRepository.insert({
+    const {identifiers} = await categoriesRepository.insert({
       title: 'Salary',
     });
 
@@ -200,7 +200,7 @@ describe('Transaction', () => {
     const transactionsRepository = getRepository(Transaction);
     const categoriesRepository = getRepository(Category);
 
-    const importCSV = path.resolve(__dirname, 'import_template.csv');
+    const importCSV = path.resolve(__dirname, 'file.csv');
 
     await request(app).post('/transactions/import').attach('file', importCSV);
 
